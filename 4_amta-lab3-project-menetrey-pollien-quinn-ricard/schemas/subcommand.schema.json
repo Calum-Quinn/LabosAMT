@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uku3lig.net/subcommand.schema.json",
+  "title": "Slash Command Subcommand",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "pattern": ".{1,100}"
+    },
+    "options": {
+      "type": "object",
+      "patternProperties": {
+        "[A-Za-z0-9-]{1,32}": {
+          "$ref": "option.schema.json"
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 25
+    }
+  },
+  "required": ["description"],
+  "additionalProperties": false
+}

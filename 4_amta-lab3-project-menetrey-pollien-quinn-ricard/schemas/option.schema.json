@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uku3lig.net/option.schema.json",
+  "title": "Slash Command Option",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["string", "integer", "boolean", "user", "channel", "role", "mentionable"]
+    },
+    "description": {
+      "type": "string",
+      "pattern": ".{1,100}"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": ["object", "string"],
+        "patternProperties": {
+          ".+": {
+            "type": ["string","integer"]
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 25
+    },
+    "choices-from-enum": {
+      "type": "string",
+      "pattern": "^[A-Z][a-zA-Z0-9]*$"
+    }
+  },
+  "required": ["type","description"],
+  "not": {"required": ["choices", "choices-from-enum"]},
+  "additionalProperties": false
+}

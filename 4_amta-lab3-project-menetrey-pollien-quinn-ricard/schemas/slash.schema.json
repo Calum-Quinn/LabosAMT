@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uku3lig.net/slash.schema.json",
+  "title": "Slash Command",
+  "description": "A Discord slash command",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The command's name",
+      "type": "string",
+      "pattern": "[A-Za-z0-9-]{1,32}"
+    },
+    "description": {
+      "description": "The command's description",
+      "type": "string",
+      "pattern": ".{1,100}"
+    },
+    "options": {
+      "description": "The command's options",
+      "type": "array",
+      "items": {
+        "$ref": "option.schema.json"
+      },
+      "minProperties": 1,
+      "maxProperties": 25
+    },
+    "subcommands": {
+      "type": "object",
+      "patternProperties": {
+        "[A-Za-z0-9-]{1,32}": {
+          "$ref": "subcommand.schema.json"
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 25
+    },
+    "subcommandGroups": {
+      "type": "object",
+      "patternProperties": {
+        "[A-Za-z0-9-]{1,32}": {
+          "$ref": "subcommandgroup.schema.json"
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 25
+    }
+  },
+  "required": ["name", "description"],
+  "not": {"required": ["options","subCommands","subCommandsGroup"]}
+}
