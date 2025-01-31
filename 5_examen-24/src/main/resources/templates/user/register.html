@@ -1,0 +1,31 @@
+{#include layout}
+
+    <!-- TODO
+        Hint: A safe expression ends with the ?? suffix and results in null if the expression cannot be resolved.
+        It can be very useful e.g. in \{#if\} sections: \{#if valueNotFound??\}Only rendered if valueNotFound is truthy!\{/if\}.
+        In fact, ?? is just a shorthand notation for .or(null), i.e. \{#if valueNotFound??\} becomes \{#if valueNotFound.or(null)\}.
+    -->
+
+    {#title}Register{/title}
+
+    <h1>Register</h1>
+
+    {#if error??}
+        <p style="color: red;">{error}</p>
+    {/if}
+
+    <form action="/user/register" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="/user/login">Login here</a>.</p>
+
+{/include}

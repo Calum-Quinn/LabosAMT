@@ -1,0 +1,38 @@
+{#include layout}
+
+    {#title}Wiki Pulse Service{/title}
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/wiki">Wiki</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Service</li>
+        </ol>
+    </nav>
+
+    <h1>Wiki Pulse Service</h1>
+
+    <div class="col-lg-8 px-0">
+        <p class="fs-5"></p>
+
+        <hr class="col-1 my-4">
+
+        <div>
+        Current state: {state ? "running" : "stopped"}
+        </div>
+
+        <div>
+        Number of events processed this run: {nb}
+        </div>
+
+        <div>
+            Number of events processed last run: {lastnb}
+        </div>
+
+        <hr class="col-1 my-4">
+
+        <a href="/wiki/start" class="btn btn-secondary">Start</a>
+        <a href="/wiki/stop" class="btn btn-primary">Stop</a>
+    </div>
+
+{/include}

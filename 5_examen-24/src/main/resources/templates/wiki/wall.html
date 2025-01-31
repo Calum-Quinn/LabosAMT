@@ -1,0 +1,67 @@
+{#include layout}
+
+    {#title}Wiki Pulse Wall{/title}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/wiki">Wiki</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pulse Wall</li>
+        </ol>
+    </nav>
+
+    <h1>Wiki Pulse Wall</h1>
+    A wall of the events being processed.
+
+    <div id="messages">
+    </div>
+
+    <div id ="bottom"></div>
+    <script>
+        let form = document.querySelector('form');
+        let messages = document.querySelector('#messages');
+        let bottom = document.getElementById("bottom");
+
+        // Receive message from SSE
+        let sse = new EventSource('/wiki/sse');
+        sse.addEventListener('message', function (event) {
+            let message = JSON.parse(event.data);
+
+            // TODO: remove this log once messages flow is up
+            console.log(message);
+
+            // For better stability and performance to appends events use insertAdjacentHTML
+            // let str = '<p>something</p>'
+            // messages.insertAdjacentHTML( 'beforeend', str );
+
+            // https://icons.getbootstrap.com/
+            let icon =  'bi-question-octagon';
+            let type = message.type?? 'none';
+            switch (type) {
+                case 'edit':
+                    icon = 'bi-pencil';
+                    break;
+                case 'log':
+                    icon = "bi-activity";
+                    break;
+                case "categorize":
+                    icon = "bi-bookmark";
+                    break;
+                case "new":
+                    icon = " bi-file-earmark-plus"
+                    break;
+                default:
+            }
+
+            // TODO icon based on type, clickable icon with URL according to notify_url, title attribute (hover-text) witht the id,title
+            // Example: <i class="bi bi-pencil"></i>messages.insertAdjacentHTML('beforeend', `
+            messages.insertAdjacentHTML('beforeend', `
+                <div class="event-message">
+                    <i class="bi ${icon}" title="${message.title}"></i>
+                    <span>${message.title}</span>
+                </div>
+            `);
+
+
+        });
+    </script>
+{/include}

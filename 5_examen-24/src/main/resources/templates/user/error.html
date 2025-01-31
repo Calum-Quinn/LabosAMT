@@ -1,0 +1,11 @@
+{#include layout}
+
+    {#title}Error{/title}
+
+    <h1>{title ?: 'Authentication error'}</h1>
+
+    {message ?: 'The authentication failed'}
+    <br/>
+    <a href="/user">User Page</a>
+
+{/include}

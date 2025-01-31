@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/mock-me-football/v2/stream/recentchange"
+  },
+
+  "response": {
+    "status": 200,
+    "bodyFileName": "football.txt",
+    "headers": {
+      "Content-Type": "text/event-stream; charset=utf-8"
+    },
+    "chunkedDribbleDelay": {
+      "numberOfChunks": 50,
+      "totalDuration": 10000
+    }
+  }
+}
